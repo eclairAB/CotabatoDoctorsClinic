@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A119DE39-E0E3-4F39-BBFE-1CD51EB9C9B2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Clinic</RootNamespace>
+    <AssemblyName>Clinic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\capstone_pis\Administrator\Administrator\bin\Debug\MySql.Data.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connection.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainActivity.Designer.cs">
+      <DependentUpon>MainActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainActivity.resx">
+      <DependentUpon>MainActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001-ambulance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\002-anesthesia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\003-baby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\004-bandage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\005-ankle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\006-blood-pressure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\007-blood-transfusion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\008-cardiogram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\009-heart-rate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\010-charity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\011-crutches.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\012-doctor-coat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\013-doctor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\014-doctor-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\015-medical-history.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\016-forceps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\017-hospital-bed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\018-hospital.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\019-medical-instrument.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\020-patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\021-mask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\022-medical-history-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\023-microscope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\024-nurse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\025-otoscope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\026-pills.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\027-scalpel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\028-stethoscope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\029-stretcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\030-surgery-room.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\031-syringe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\032-thermometer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\033-vials.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\034-weight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\035-wheelchair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\036-x-rays.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backspace.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

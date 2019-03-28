@@ -1,0 +1,10 @@
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\bin\Debug\Laboratory.exe.config
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\bin\Debug\Laboratory.exe
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\bin\Debug\Laboratory.pdb
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\bin\Debug\MySql.Data.DLL
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.csprojResolveAssemblyReference.cache
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.Form1.resources
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.Properties.Resources.resources
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.csproj.GenerateResource.Cache
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.exe
+c:\users\benedict\documents\visual studio 2013\Projects\Laboratory\Laboratory\obj\Debug\Laboratory.pdb
