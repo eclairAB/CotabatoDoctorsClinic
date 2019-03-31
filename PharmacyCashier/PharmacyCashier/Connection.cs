@@ -18,7 +18,8 @@ namespace PharmacyCashier
 
         public Connection()
         {//169.254.15.113
-            _server = "127.0.0.1";
+            //_server = "127.0.0.1";
+            _server = "192.168.0.117";
             _port = "3306";
             _db = "capstone_pis";
             username = "root";

@@ -163,7 +163,15 @@ namespace PharmacyCashier
 
         private void button3_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            //listView1.Items.Clear();
+            if (listView2.Items.Count > 0)
+            {
+                MessageBox.Show("Transaction is on going! Please finish first.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+
+            }
         }
 
         private void MedicineTransaction_Load(object sender, EventArgs e)
@@ -174,7 +182,26 @@ namespace PharmacyCashier
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            if(txtid.Text.Length <=0)
+            {
+                MessageBox.Show("Please select an item to remove", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                foreach (ListViewItem eachItem in listView2.SelectedItems)
+                {
+                    listView2.Items.Remove(eachItem);
+                }
+                decimal a = Convert.ToDecimal(txtqtytotal.Text);
+                decimal b = Convert.ToDecimal(txtqtyback.Text);
+                decimal c = a + b;
+                con.Close();
+                con.Open();
+                cmd = new MySqlCommand("update medicine_tbl set qty = '" + c.ToString() + "'where medicine_id = '" + txtid.Text + "'", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                load();
+            }
         }
 
         private void btnSettle_Click(object sender, EventArgs e)
@@ -185,7 +212,29 @@ namespace PharmacyCashier
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            string audit_trail = null;
+            if (listView2.Items.Count > 0)
+            {
+                MessageBox.Show("Transaction is on going! Please finish first.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                
+                con.Close();
+                con.Open();
+                cmd = new MySqlCommand("select max(id) as maxid from audit_trail", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    audit_trail = dr.GetString("maxid");
+                }
+                con.Close();
+                con.Open();
+                cmd = new MySqlCommand("update audit_trail set dateout = '" + DateTime.Now.ToString("yyyy-MM-dd") + "',timeout = '" + DateTime.Now.ToString("HH:mm:ss") + "'where id = '" + audit_trail + "'", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Application.Exit();
+            }
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
@@ -230,7 +279,7 @@ namespace PharmacyCashier
                 {
                     ListViewItem item = new ListViewItem(dr.GetString("medicine_id"));
                     item.SubItems.Add(dr.GetString("medicine_id"));
-                    item.SubItems.Add(dr.GetString("trade_name"));
+                    item.SubItems.Add(dr.GetString("trade_name"));  
                     item.SubItems.Add(dr.GetString("generic_name"));
                     item.SubItems.Add(dr.GetString("drug_type"));
                     item.SubItems.Add(dr.GetString("unit"));
@@ -273,6 +322,8 @@ namespace PharmacyCashier
                 {
                     button1.Enabled = false;
                 }
+                textBox3.Text = listView1.Items[i].SubItems[1].Text;
+                txtid.Text = listView1.Items[i].SubItems[0].Text;
             }
         }
 
@@ -288,39 +339,86 @@ namespace PharmacyCashier
             }
             else
             {
-                total = numericUpDown1.Value * price;
-                ListViewItem item = new ListViewItem(medicine_id);
-                item.SubItems.Add(trade_name);
-                item.SubItems.Add(generic_name);
-                item.SubItems.Add(drug_type);
-                item.SubItems.Add(unit);
-                item.SubItems.Add(unit_value);
-                item.SubItems.Add(numericUpDown1.Value.ToString());
-                item.SubItems.Add(price.ToString("#,##0.00"));
-                item.SubItems.Add(total.ToString("#,#00.00"));
-                listView2.Items.Add(item);
-                decimal a = 0;
-                decimal b = 0;
-                for(int i = 0; listView2.Items.Count > i;i++)
+                foreach (int i in listView1.SelectedIndices)
                 {
-                    a += decimal.Parse(listView2.Items[i].SubItems[6].Text);
-                    b += decimal.Parse(listView2.Items[i].SubItems[8].Text);
-                    txtItem.Text = a.ToString();
-                    txtAmount.Text = b.ToString();
+                    string testing = listView1.Items[i].Text;
+                    ListViewItem itemsearch = listView2.FindItemWithText(testing);
+                    if (itemsearch == null)
+                    {
+                        total = numericUpDown1.Value * price;
+                        ListViewItem item = new ListViewItem(medicine_id);
+                        item.SubItems.Add(trade_name);
+                        item.SubItems.Add(generic_name);
+                        item.SubItems.Add(drug_type);
+                        item.SubItems.Add(unit);
+                        item.SubItems.Add(unit_value);
+                        item.SubItems.Add(numericUpDown1.Value.ToString());
+                        item.SubItems.Add(price.ToString("#,##0.00"));
+                        item.SubItems.Add(total.ToString("#,#00.00"));
+                        listView2.Items.Add(item);
+                        decimal a = 0;
+                        decimal b = 0;
+                        for (int z = 0; listView2.Items.Count > z; z++)
+                        {
+                            a += decimal.Parse(listView2.Items[z].SubItems[6].Text);
+                            b += decimal.Parse(listView2.Items[z].SubItems[8].Text);
+                            txtItem.Text = a.ToString();
+                            txtAmount.Text = b.ToString();
+                        }
+                        decimal vat = Convert.ToDecimal(txtAmount.Text) * Convert.ToDecimal(".12");
+                        decimal sub = Convert.ToDecimal(txtAmount.Text) - vat;
+                        txtvat.Text = vat.ToString("#,#00.00");
+                        txtsub.Text = sub.ToString("#,#00.00");
+                        decimal c = qty - numericUpDown1.Value;
+                        con.Close();
+                        con.Open();
+                        cmd = new MySqlCommand("update medicine_tbl set qty = '" + c.ToString() + "'where medicine_id = '" + txtid.Text + "'", con);
+                        cmd.ExecuteNonQuery();
+                        numericUpDown1.Value = 0;
+                        load();
+                    }
+                    else
+                    {
+                        for (int x = 0; listView2.Items.Count > x; x++)
+                        {
+                            if (listView2.Items[x].SubItems[0].Text == testing)
+                            {
+                                decimal aa = Convert.ToDecimal(listView2.Items[x].SubItems[6].Text);
+                                decimal bb = numericUpDown1.Value;
+                                decimal cc = aa + bb;
+                                decimal alltal = cc * Convert.ToDecimal(listView2.Items[x].SubItems[7].Text);
+                                listView2.Items[x].SubItems[6].Text = cc.ToString();
+                                listView2.Items[x].SubItems[8].Text = alltal.ToString("#,#00.00");
+                                decimal a = 0;
+                                decimal b = 0;
+                                for (int z = 0; listView2.Items.Count > z; z++)
+                                {
+                                    a += decimal.Parse(listView2.Items[z].SubItems[6].Text);
+                                    b += decimal.Parse(listView2.Items[z].SubItems[8].Text);
+                                    txtItem.Text = a.ToString();
+                                    txtAmount.Text = b.ToString();
+                                }
+                                decimal vat = Convert.ToDecimal(txtAmount.Text) * Convert.ToDecimal(".12");
+                                decimal sub = Convert.ToDecimal(txtAmount.Text) - vat;
+                                txtvat.Text = vat.ToString("#,#00.00");
+                                txtsub.Text = sub.ToString("#,#00.00");
+                                decimal c = qty - numericUpDown1.Value;
+                                con.Close();
+                                con.Open();
+                                cmd = new MySqlCommand("update medicine_tbl set qty = '" + c.ToString() + "'where medicine_id = '" + txtid.Text + "'", con);
+                                cmd.ExecuteNonQuery();
+                                numericUpDown1.Value = 0;
+                                load();
+
+                            }
+                        }
+                    }
                 }
-                decimal vat = Convert.ToDecimal(txtAmount.Text) * Convert.ToDecimal(".12");
-                decimal sub = Convert.ToDecimal(txtAmount.Text) - vat;
-                txtvat.Text = vat.ToString("#,#00.00");
-                txtsub.Text = sub.ToString("#,#00.00");
-                decimal c = qty - numericUpDown1.Value;
-                con.Close();
-                con.Open();
-                cmd = new MySqlCommand("update medicine_tbl set qty = '" + c.ToString() + "'", con);
-                cmd.ExecuteNonQuery();
-                numericUpDown1.Value = 0;
-                load();
+                
+
             }
             button1.Enabled = false;
+            txtid.Text = "";
         }
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
@@ -369,6 +467,11 @@ namespace PharmacyCashier
                         {
                             printDocument.Print();
                         }
+                        else
+                        {
+                            MessageBox.Show("Transaction Completed", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
                         //  } 
                         listView2.Items.Clear();
                         load();
@@ -382,7 +485,13 @@ namespace PharmacyCashier
                         txtcash.Text = "";
                         txtchange.Text = "";
                         panel4.Visible = false;
+                        load();
+                        loadtransact();
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Please pay the exact amount", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -398,6 +507,38 @@ namespace PharmacyCashier
                 {
                     txtchange.Text = c.ToString("#,#00.00");
                     txtchange.Text.Replace('-', ' ');
+                }
+            }
+        }
+
+        private void txtcash_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (int i in listView2.SelectedIndices)
+            {
+                txtid.Text = listView2.Items[i].SubItems[0].Text;
+                txtqtyback.Text = listView2.Items[i].SubItems[6].Text;
+                con.Close();
+                con.Open();
+                cmd = new MySqlCommand("Select * from medicine_tbl where medicine_id = '" + txtid.Text + "'", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtqtytotal.Text = dr.GetString("qty"); 
                 }
             }
         }
