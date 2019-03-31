@@ -50,7 +50,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtpos = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
@@ -87,6 +87,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtid = new System.Windows.Forms.TextBox();
+            this.txtqtyback = new System.Windows.Forms.TextBox();
+            this.txtqtytotal = new System.Windows.Forms.TextBox();
+            this.txtiduser = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -136,6 +142,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(1086, 72);
             this.textBox1.Name = "textBox1";
@@ -228,7 +235,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtname);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.txtpos);
             this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(980, 104);
             this.panel2.Name = "panel2";
@@ -277,13 +284,13 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Position:";
             // 
-            // textBox2
+            // txtpos
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(82, 24);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(277, 26);
-            this.textBox2.TabIndex = 5;
+            this.txtpos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtpos.Location = new System.Drawing.Point(82, 24);
+            this.txtpos.Name = "txtpos";
+            this.txtpos.Size = new System.Drawing.Size(277, 26);
+            this.txtpos.TabIndex = 5;
             // 
             // panel3
             // 
@@ -408,6 +415,7 @@
             this.columnHeader20,
             this.columnHeader21,
             this.columnHeader22});
+            this.listView2.FullRowSelect = true;
             this.listView2.GridLines = true;
             this.listView2.Location = new System.Drawing.Point(11, 357);
             this.listView2.Name = "listView2";
@@ -415,6 +423,7 @@
             this.listView2.TabIndex = 17;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // columnHeader14
             // 
@@ -472,7 +481,6 @@
             this.label11.Size = new System.Drawing.Size(72, 20);
             this.label11.TabIndex = 18;
             this.label11.Text = "Quantity:";
-            this.label11.Visible = false;
             // 
             // numericUpDown1
             // 
@@ -577,9 +585,9 @@
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.textBox4);
             this.panel4.Controls.Add(this.panel5);
-            this.panel4.Location = new System.Drawing.Point(167, 75);
+            this.panel4.Location = new System.Drawing.Point(305, 209);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(765, 549);
+            this.panel4.Size = new System.Drawing.Size(765, 362);
             this.panel4.TabIndex = 21;
             this.panel4.Visible = false;
             // 
@@ -588,7 +596,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(567, 515);
+            this.label15.Location = new System.Drawing.Point(574, 312);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(188, 20);
             this.label15.TabIndex = 20;
@@ -638,6 +646,7 @@
             this.txtcash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtcash.TextChanged += new System.EventHandler(this.txtcash_TextChanged);
             this.txtcash.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcash_KeyDown);
+            this.txtcash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcash_KeyPress);
             // 
             // label12
             // 
@@ -670,12 +679,74 @@
             this.panel5.Size = new System.Drawing.Size(765, 56);
             this.panel5.TabIndex = 5;
             // 
+            // textBox3
+            // 
+            this.textBox3.Enabled = false;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(359, 293);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(308, 26);
+            this.textBox3.TabIndex = 23;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(264, 296);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 20);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "Item name:";
+            // 
+            // txtid
+            // 
+            this.txtid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtid.Location = new System.Drawing.Point(35, 300);
+            this.txtid.Name = "txtid";
+            this.txtid.Size = new System.Drawing.Size(113, 26);
+            this.txtid.TabIndex = 24;
+            this.txtid.Visible = false;
+            // 
+            // txtqtyback
+            // 
+            this.txtqtyback.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtqtyback.Location = new System.Drawing.Point(35, 268);
+            this.txtqtyback.Name = "txtqtyback";
+            this.txtqtyback.Size = new System.Drawing.Size(113, 26);
+            this.txtqtyback.TabIndex = 25;
+            this.txtqtyback.Visible = false;
+            // 
+            // txtqtytotal
+            // 
+            this.txtqtytotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtqtytotal.Location = new System.Drawing.Point(35, 332);
+            this.txtqtytotal.Name = "txtqtytotal";
+            this.txtqtytotal.Size = new System.Drawing.Size(113, 26);
+            this.txtqtytotal.TabIndex = 26;
+            this.txtqtytotal.Visible = false;
+            // 
+            // txtiduser
+            // 
+            this.txtiduser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtiduser.Location = new System.Drawing.Point(829, 72);
+            this.txtiduser.Name = "txtiduser";
+            this.txtiduser.Size = new System.Drawing.Size(123, 26);
+            this.txtiduser.TabIndex = 10;
+            this.txtiduser.Visible = false;
+            // 
             // MedicineTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1375, 780);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.txtiduser);
+            this.Controls.Add(this.txtqtytotal);
+            this.Controls.Add(this.txtqtyback);
+            this.Controls.Add(this.txtid);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -734,7 +805,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtAmount;
@@ -773,5 +843,12 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.TextBox txtname;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtid;
+        private System.Windows.Forms.TextBox txtqtyback;
+        private System.Windows.Forms.TextBox txtqtytotal;
+        public System.Windows.Forms.TextBox txtpos;
+        public System.Windows.Forms.TextBox txtiduser;
     }
 }

@@ -8,4 +8,3 @@ C:\Users\Aron Joseph\Desktop\Project\PharmacyCashier\PharmacyCashier\bin\Debug\M
 C:\Users\Aron Joseph\Desktop\Project\PharmacyCashier\PharmacyCashier\obj\Debug\PharmacyCashier.exe
 C:\Users\Aron Joseph\Desktop\Project\PharmacyCashier\PharmacyCashier\obj\Debug\PharmacyCashier.pdb
 C:\Users\Aron Joseph\Desktop\Project\PharmacyCashier\PharmacyCashier\obj\Debug\PharmacyCashier.Form1.resources
-C:\Users\Aron Joseph\Desktop\Project\PharmacyCashier\PharmacyCashier\obj\Debug\PharmacyCashier.csprojResolveAssemblyReference.cache
