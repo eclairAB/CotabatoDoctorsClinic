@@ -814,7 +814,6 @@
             this.txtothers.Name = "txtothers";
             this.txtothers.Size = new System.Drawing.Size(238, 45);
             this.txtothers.TabIndex = 14;
-            this.txtothers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtprice_KeyDown);
             // 
             // panel7
             // 

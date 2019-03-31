@@ -206,7 +206,7 @@ namespace PharmacyCashier
 
         private void btnSettle_Click(object sender, EventArgs e)
         {
-            if(listView2.Items.Count <=0 )
+            if (listView2.Items.Count > 0)
             {
                 MessageBox.Show("Transaction first before proceeding to payment.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -215,7 +215,6 @@ namespace PharmacyCashier
                 panel4.Visible = true;
                 txtcash.Select();
             }
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -612,11 +611,8 @@ namespace PharmacyCashier
 
         private void txtprice_Leave(object sender, EventArgs e)
         {
-            if (txtprice.Text.Length > 0)
-            {
-                decimal a = Convert.ToDecimal(txtprice.Text);
-                txtprice.Text = a.ToString("#,#00.00");
-            }
+            decimal a = Convert.ToDecimal(txtprice.Text);
+            txtprice.Text = a.ToString("#,#00.00");
         }
     }
 }
