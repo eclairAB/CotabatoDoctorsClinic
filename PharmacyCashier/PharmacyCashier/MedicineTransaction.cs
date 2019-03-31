@@ -542,5 +542,70 @@ namespace PharmacyCashier
                 }
             }
         }
+
+        private void txtprice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtprice_Leave(sender, e);
+                if (txtprice.Text == "" || txtothers.Text == "")
+                {
+                    if(MessageBox.Show("You entered an empty field. do you want to cancel instead?", "Message", MessageBoxButtons.YesNo,MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        paneladd.Visible = false;
+                        txtothers.Text = "";
+                        txtprice.Text = "";
+                    }
+                }
+                else
+                {
+                    ListViewItem item = new ListViewItem(txtothers.Text);
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add(txtprice.Text);
+                    listView2.Items.Add(item);
+                    decimal a = 0;
+                    decimal b = 0;
+                    for (int z = 0; listView2.Items.Count > z; z++)
+                    {
+                        b += decimal.Parse(listView2.Items[z].SubItems[8].Text);
+                        txtAmount.Text = b.ToString("#,#00.00");
+                    }
+                    decimal vat = Convert.ToDecimal(txtAmount.Text) * Convert.ToDecimal(".12");
+                    decimal sub = Convert.ToDecimal(txtAmount.Text) - vat;
+                    txtvat.Text = vat.ToString("#,#00.00");
+                    txtsub.Text = sub.ToString("#,#00.00");
+                    paneladd.Visible = false;
+                    txtothers.Text = "";
+                    txtprice.Text = "";
+                }
+            }
+        }
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var regex = new System.Text.RegularExpressions.Regex(@"[^a-zA-Z0-9\s]");
+            if (regex.IsMatch(e.KeyChar.ToString()))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            paneladd.Visible = true;
+            txtothers.Select();
+        }
+
+        private void txtprice_Leave(object sender, EventArgs e)
+        {
+            decimal a = Convert.ToDecimal(txtprice.Text);
+            txtprice.Text = a.ToString("#,#00.00");
+        }
     }
 }
